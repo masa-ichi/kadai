@@ -15,30 +15,32 @@ class ProductController extends BaseController
 {
   public function index(Request $request)
   {
-    $input = $request->input();
-
-    var_dump($input);
-
-    return "index";
+    $product = Product::all();
+    return $product;
   }
   public function store(Request $request)
   {
-    $input = $request->input();
-
-    var_dump($input);
-
-    return "store";
+    $product = new Product;
+    $product->price = $request->price;
+    $product->title = $request->title;
+    $product->description = $request->description;
+    $product->save();
   }
-  public function show()
+  public function show($id)
   {
-    return "show";
+    $product = Product::find($id);
+    return $product;
   }
-  public function update()
+  public function update(Request $request, $id)
   {
-    return "update";
+    $product = Product::find($id);
+    $product->title = $request->title;
+    $product->body = $request->body;
+    $product->save();
   }
-  public function destroy()
+  public function destroy($id)
   {
-    return "destroy";
+    $product = Product::find($id);
+    $product->delete();
   }
 }
