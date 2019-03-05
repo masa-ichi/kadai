@@ -24,7 +24,6 @@ class ProductController extends BaseController
     $product->price = $request->price;
     $product->title = $request->title;
     $product->description = $request->description;
-    $product->image = $request->image
     $product->save();
   }
   public function show($id)
@@ -35,10 +34,8 @@ class ProductController extends BaseController
   public function update(Request $request, $id)
   {
     $product = Product::find($id);
-    $product->price = $request->price;
     $product->title = $request->title;
-    $product->description = $request->description;
-    $product->image = $request->image
+    $product->body = $request->body;
     $product->save();
   }
   public function destroy($id)
