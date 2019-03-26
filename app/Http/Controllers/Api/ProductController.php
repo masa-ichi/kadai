@@ -16,10 +16,16 @@ class ProductController extends BaseController
   public function index(Request $request)
   {
     $product = Product::all();
-    return $product;
+    return response()->json(['product' => $product]);
   }
   public function store(Request $request)
   {
+    $request->validate([
+      'price' => 'integer',
+      'title' => 'string|max:100',
+      'description' => 'string|max:500',
+      'image' => 'integer',       
+    ]);
     $product = new Product;
     $product->price = $request->price;
     $product->title = $request->title;
@@ -30,7 +36,7 @@ class ProductController extends BaseController
   public function show($id)
   {
     $product = Product::find($id);
-    return $product;
+    return response()->json(['product' => $product]);
   }
   public function update(Request $request, $id)
   {
