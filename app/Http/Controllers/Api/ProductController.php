@@ -24,7 +24,7 @@ class ProductController extends BaseController
       'price' => 'integer',
       'title' => 'string|max:100',
       'description' => 'string|max:500',
-      'image' => 'integer',       
+      'image' => 'integer',
     ]);
     $product = new Product;
     $product->price = $request->price;
@@ -40,6 +40,12 @@ class ProductController extends BaseController
   }
   public function update(Request $request, $id)
   {
+    $request->validate([
+      'price' => 'integer',
+      'title' => 'string|max:100',
+      'description' => 'string|max:500',
+      'image' => 'integer',
+    ]);
     $product = Product::find($id);
     $product->price = $request->price;
     $product->title = $request->title;
