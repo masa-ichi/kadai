@@ -18,9 +18,9 @@ class ProductController extends BaseController
 
   {
 
-    $product = Product::all();
+      $product = Product::all();
 
-    return response()->json(['product' => $product]);
+      return response()->json(['product' => $product]);
 
   }
 
@@ -28,70 +28,78 @@ class ProductController extends BaseController
 
   {
 
-    $request->validate([
+      $request->validate([
 
-      'price' => 'integer',
-      'title' => 'string|max:100',
-      'description' => 'string|max:500',
-      'image' => 'integer',
+          'price' => 'integer',
+          'title' => 'string|max:100',
+          'description' => 'string|max:500',
+          'image' => 'integer',
 
-    ]);
+      ]);
 
-    $product = new Product;
+      $product = new Product;
 
-    $product->price = $request->price;
+      $product->price = $request->price;
 
-    $product->title = $request->title;
+      $product->title = $request->title;
 
-    $product->description = $request->description;
+      $product->description = $request->description;
 
-    $product->image = $request->image;
+      $product->image = $request->image;
 
-    $product->save();
+      $product->save();
 
   }
 
   public function show($id)
   {
 
-    $product = Product::find($id);
+      $id->validate([
+          'id'=> 'integer',
+      ]);
 
-    return response()->json(['product' => $product]);
+      $product = Product::find($id);
+
+      return response()->json(['product' => $product]);
 
   }
 
   public function update(Request $request, $id)
   {
 
-    $request->validate([
+      $request->validate([
 
-      'price' => 'integer',
-      'title' => 'string|max:100',
-      'description' => 'string|max:500',
-      'image' => 'integer',
+         'price' => 'integer',
+         'title' => 'string|max:100',
+         'description' => 'string|max:500',
+          'image' => 'integer',
 
-    ]);
+      ]);
 
-    $product = Product::find($id);
+      $product = Product::find($id);
 
-    $product->price = $request->price;
+      $product->price = $request->price;
 
-    $product->title = $request->title;
+      $product->title = $request->title;
 
-    $product->description = $request->description;
+      $product->description = $request->description;
 
-    $product->image = $request->image;
+      $product->image = $request->image;
 
-    $product->save();
+      $product->save();
 
   }
 
   public function destroy($id)
   {
 
-    $product = Product::find($id);
+      $id->validate([
+          'id'=> 'integer',
+      ]);
 
-    $product->delete();
+      $product = Product::find($id);
+
+      $product->delete();
 
   }
 }
